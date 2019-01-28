@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Todo;
 
 class HomeController extends Controller
@@ -24,7 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $todos = Todo::all();
+
+        $todos = Auth::user()->todos;
+
         return view('home',array('todos'=>$todos));
     }
 }

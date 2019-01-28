@@ -36,18 +36,38 @@
                           <th scope="row">3</th>
                           <td>Go to School</td>
                         </tr> -->
-
+                       
                         @foreach($todos as $todo)
                             <tr>
                               <th scope="row">{{ $loop->iteration }}</th>
                               <td>{{ $todo->title }}</td>
                               <td>{{ $todo->date }}</td>
                               <td>
-                                <a href="{{ route('todo.id.edit', ['id'=>$todo->id]) }}" class="btn btn-warning">Edit</a>
-                                <a href="#" class="btn btn-danger">Delete</a>
+                                
+                                <a
+                                  href="{{ route('todo.id.edit', ['id'=>$todo->id]) }}" 
+                                  class="btn btn-warning">
+                                    Edit
+                                </a>
+
+                                <a  
+                                  href="javascript: $('#todo-{{$todo->id}}-delete').submit()" 
+                                  onclick="return confirm('Are you sure?')" 
+                                  class="btn btn-danger">
+                                  Delete
+                                </a>
+
+                                <form   
+                                  id="todo-{{$todo->id}}-delete" 
+                                  method="post" 
+                                  action="{{ route('todo.id.delete', array('id'=>$todo->id)) }}">
+                                    @csrf
+                                </form>
+
                               </td>
                             </tr>
                         @endforeach
+
                         <tr>
                             <td colspan="4" style="text-align:right">
                                 <a href="{{ route('todo.create') }}" class="btn btn-primary">
