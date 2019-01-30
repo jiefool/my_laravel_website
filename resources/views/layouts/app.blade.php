@@ -75,6 +75,11 @@
                                     </form>
                                 </div>
                             </li>
+                            @if(Auth::user()->is_admin)
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('todo.users') }}">Users</a>
+                                </li>
+                            @endif
                         @endguest
                     </ul>
                 </div>
